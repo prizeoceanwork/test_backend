@@ -36189,9 +36189,9 @@ var import_dotenv = __toESM(require_main(), 1);
 import_dotenv.default.config();
 var { Pool: Pool3 } = esm_default;
 var pool = new Pool3({
-  connectionString: process.env.POSTGRES_URL
+  connectionString: process.env.DATABASE_URL
 });
-if (!process.env.POSTGRES_URL) {
+if (!process.env.DATABASE_URL) {
   throw new Error("POSTGRES_URL is not set in environment variables");
 } else {
   console.log("POSTGRES_URL is set");
