@@ -36244,24 +36244,23 @@ var import_dotenv2 = __toESM(require_main(), 1);
 import_dotenv2.default.config();
 var app = (0, import_express.default)();
 app.use(import_express.default.json());
-app.use((req, res, next) => {
-  const allowedOrigins = [
-    "https://game1-production-351f.up.railway.app",
-    "https://game2-production.up.railway.app",
-    "http://localhost:4173"
-  ];
-  const origin = req.headers.origin;
-  if (allowedOrigins.includes(origin)) {
-    res.header("Access-Control-Allow-Origin", origin);
-  }
-  res.header("Access-Control-Allow-Methods", "GET,POST,OPTIONS,PUT,DELETE");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  res.header("Access-Control-Allow-Credentials", "true");
-  if (req.method === "OPTIONS") {
-    return res.sendStatus(204);
-  }
-  next();
-});
+var allowedOrigins = [
+  "https://game1-production-351f.up.railway.app",
+  "https://game2-production.up.railway.app",
+  "http://localhost:4173"
+];
+app.use((0, import_cors.default)({
+  origin: function(origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, origin);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: ["GET", "POST", "OPTIONS", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true
+}));
 ensureGame("game1", "Game 1");
 ensureGame("game2", "Game 2");
 ensureGame("game3", "Game 3");

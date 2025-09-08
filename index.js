@@ -10,29 +10,25 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
-// Manual CORS middleware
-app.use((req, res, next) => {
-  const allowedOrigins = [
-    "https://game1-production-351f.up.railway.app",
-    "https://game2-production.up.railway.app",
-    "http://localhost:4173",
-  ];
+const allowedOrigins = [
+  "https://game1-production-351f.up.railway.app",
+  "https://game2-production.up.railway.app",
+  "http://localhost:4173",
+];
 
-  const origin = req.headers.origin;
-  if (allowedOrigins.includes(origin)) {
-    res.header("Access-Control-Allow-Origin", origin);
-  }
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, origin); // IMPORTANT: echo the origin back
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: ["GET", "POST", "OPTIONS", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true
+}));
 
-  res.header("Access-Control-Allow-Methods", "GET,POST,OPTIONS,PUT,DELETE");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  res.header("Access-Control-Allow-Credentials", "true");
-
-  if (req.method === "OPTIONS") {
-    return res.sendStatus(204);
-  }
-
-  next();
-});
 
 // Make sure 3 games exist at startup
  ensureGame("game1", "Game 1");
