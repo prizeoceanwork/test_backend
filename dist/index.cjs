@@ -36244,7 +36244,9 @@ var import_dotenv2 = __toESM(require_main(), 1);
 import_dotenv2.default.config();
 var app = (0, import_express.default)();
 app.use(import_express.default.json());
-app.use((0, import_cors.default)());
+app.use((0, import_cors.default)({
+  origin: ["https://game1-production-351f.up.railway.app", "https://game2-production.up.railway.app"]
+}));
 ensureGame("game1", "Game 1");
 ensureGame("game2", "Game 2");
 ensureGame("game3", "Game 3");
@@ -36315,8 +36317,9 @@ app.get("/seed", async (req, res) => {
 app.use("/", (req, res) => {
   res.send("Server is up and running");
 });
-app.listen(4e3, () => {
-  console.log("Server running on http://localhost:4000");
+var PORT = process.env.PORT || 4e3;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
 /*! Bundled license information:
 
