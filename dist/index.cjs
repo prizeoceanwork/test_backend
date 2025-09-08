@@ -36263,7 +36263,7 @@ app.use(
     credentials: true
   })
 );
-app.options("*", (0, import_cors.default)());
+app.options(/.*/, (0, import_cors.default)());
 ensureGame("game1", "Game 1");
 ensureGame("game2", "Game 2");
 ensureGame("game3", "Game 3");

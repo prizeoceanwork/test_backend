@@ -34,7 +34,7 @@ app.use(
 );
 
 // Explicitly handle preflight
-app.options("*", cors());
+app.options(/.*/, cors());
 // Make sure 3 games exist at startup
  ensureGame("game1", "Game 1");
  ensureGame("game2", "Game 2");
