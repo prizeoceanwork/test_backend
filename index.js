@@ -9,7 +9,10 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
-app.use(cors())
+app.use(cors({
+  origin: ['https://game1-production-351f.up.railway.app' , 'https://game2-production.up.railway.app' ],
+  credentials: true
+}));
 // Make sure 3 games exist at startup
  ensureGame("game1", "Game 1");
  ensureGame("game2", "Game 2");
