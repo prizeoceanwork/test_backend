@@ -18,7 +18,7 @@ app.use(cors({
  ensureGame("game3", "Game 3");
 
 // Dynamic register route
-app.post("/:slug/register", async (req, res) => {
+app.post("/api/:slug/register", async (req, res) => {
   try {
     const reg = await registerForGame(req.params.slug, req.body);
     res.json({ message: "Registered successfully", registration: reg });
@@ -29,7 +29,7 @@ app.post("/:slug/register", async (req, res) => {
 });
 
 // Dynamic stats route
-app.get("/:slug/stats", async (req, res) => {
+app.get("/api/:slug/stats", async (req, res) => {
   try {
     const count = await getStatsForGame(req.params.slug);
     res.json({ registrations: count });

@@ -36250,7 +36250,7 @@ app.use((0, import_cors.default)({
 ensureGame("game1", "Game 1");
 ensureGame("game2", "Game 2");
 ensureGame("game3", "Game 3");
-app.post("/:slug/register", async (req, res) => {
+app.post("/api/:slug/register", async (req, res) => {
   try {
     const reg = await registerForGame(req.params.slug, req.body);
     res.json({ message: "Registered successfully", registration: reg });
@@ -36259,7 +36259,7 @@ app.post("/:slug/register", async (req, res) => {
     res.status(500).json({ message: "Registration failed" });
   }
 });
-app.get("/:slug/stats", async (req, res) => {
+app.get("/api/:slug/stats", async (req, res) => {
   try {
     const count2 = await getStatsForGame(req.params.slug);
     res.json({ registrations: count2 });
