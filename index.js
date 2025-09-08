@@ -9,26 +9,9 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
-const allowedOrigins = [
-  "https://game1-production-351f.up.railway.app",
-  "https://game2-production.up.railway.app",
-  "http://localhost:5173" // add for local dev
-];
-
 app.use(cors({
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  methods: ["GET", "POST", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true
+  origin: ['https://game1-production-351f.up.railway.app' , 'https://game2-production.up.railway.app' ,'http://localhost:4173' ],
 }));
-app.options("*", cors());
-
 // Make sure 3 games exist at startup
  ensureGame("game1", "Game 1");
  ensureGame("game2", "Game 2");

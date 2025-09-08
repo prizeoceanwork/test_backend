@@ -36244,25 +36244,9 @@ var import_dotenv2 = __toESM(require_main(), 1);
 import_dotenv2.default.config();
 var app = (0, import_express.default)();
 app.use(import_express.default.json());
-var allowedOrigins = [
-  "https://game1-production-351f.up.railway.app",
-  "https://game2-production.up.railway.app",
-  "http://localhost:5173"
-  // add for local dev
-];
 app.use((0, import_cors.default)({
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  methods: ["GET", "POST", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true
+  origin: ["https://game1-production-351f.up.railway.app", "https://game2-production.up.railway.app", "http://localhost:4173"]
 }));
-app.options("*", (0, import_cors.default)());
 ensureGame("game1", "Game 1");
 ensureGame("game2", "Game 2");
 ensureGame("game3", "Game 3");
