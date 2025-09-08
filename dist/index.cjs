@@ -36245,8 +36245,7 @@ import_dotenv2.default.config();
 var app = (0, import_express.default)();
 app.use(import_express.default.json());
 app.use((0, import_cors.default)({
-  origin: ["https://game1-production-351f.up.railway.app", "https://game2-production.up.railway.app"],
-  credentials: true
+  origin: "*"
 }));
 ensureGame("game1", "Game 1");
 ensureGame("game2", "Game 2");
