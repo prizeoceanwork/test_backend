@@ -36244,9 +36244,7 @@ var import_dotenv2 = __toESM(require_main(), 1);
 import_dotenv2.default.config();
 var app = (0, import_express.default)();
 app.use(import_express.default.json());
-app.use((0, import_cors.default)({
-  origin: "*"
-}));
+app.use((0, import_cors.default)());
 ensureGame("game1", "Game 1");
 ensureGame("game2", "Game 2");
 ensureGame("game3", "Game 3");
