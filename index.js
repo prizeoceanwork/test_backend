@@ -10,7 +10,7 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(cors({
-  origin: ['https://game1-production-351f.up.railway.app' , 'https://game2-production.up.railway.app' ,'http://localhost:4173' ],
+  origin: ['https://game1-production-351f.up.railway.app' , 'https://game2-production.up.railway.app' ,'http://localhost:4173'],
 }));
 // Make sure 3 games exist at startup
  ensureGame("game1", "Game 1");
@@ -18,7 +18,7 @@ app.use(cors({
  ensureGame("game3", "Game 3");
 
 // Dynamic register route
-app.post("/api/:slug/register", async (req, res) => {
+app.post("/:slug/register", async (req, res) => {
   try {
     const reg = await registerForGame(req.params.slug, req.body);
     res.json({ message: "Registered successfully", registration: reg });
@@ -29,7 +29,7 @@ app.post("/api/:slug/register", async (req, res) => {
 });
 
 // Dynamic stats route
-app.get("/api/:slug/stats", async (req, res) => {
+app.get("/:slug/stats", async (req, res) => {
   try {
     const count = await getStatsForGame(req.params.slug);
     res.json({ registrations: count });
