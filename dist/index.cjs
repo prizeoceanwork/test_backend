@@ -36216,12 +36216,6 @@ var registrations = pgTable("registrations", {
 });
 
 // controller.js
-async function ensureGame(slug, name) {
-  const existing = await db.select().from(games).where(eq(games.slug, slug));
-  if (existing.length === 0) {
-    await db.insert(games).values({ name, slug });
-  }
-}
 async function registerForGame(slug, data) {
   let game = (await db.select().from(games).where(eq(games.slug, slug)))[0];
   if (!game) {
@@ -36247,9 +36241,6 @@ app.use(import_express.default.json());
 app.use((0, import_cors.default)({
   origin: ["https://game1-production-351f.up.railway.app", "https://game2-production.up.railway.app", "http://localhost:4173"]
 }));
-ensureGame("game1", "Game 1");
-ensureGame("game2", "Game 2");
-ensureGame("game3", "Game 3");
 app.post("/:slug/register", async (req, res) => {
   try {
     const reg = await registerForGame(req.params.slug, req.body);

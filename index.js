@@ -12,10 +12,7 @@ app.use(express.json());
 app.use(cors({
   origin: ['https://game1-production-351f.up.railway.app' , 'https://game2-production.up.railway.app' ,'http://localhost:4173'],
 }));
-// Make sure 3 games exist at startup
- ensureGame("game1", "Game 1");
- ensureGame("game2", "Game 2");
- ensureGame("game3", "Game 3");
+
 
 // Dynamic register route
 app.post("/:slug/register", async (req, res) => {
